@@ -1,7 +1,24 @@
-﻿
+﻿@model IEnumerable<ASPMVCWebAppPracticing.Models.Students>
 @{
     ViewData["Title"] = "หน้าหลัก";
 }
 
 <h1 class="text-center"> คะแนนสอบรายวิชาการเขียนโปรแกรมเพื่อสร้างเว็ปแอปพลิเคชันเบื้องต้น </h1>
 
+@foreach (var students in Model)
+{
+    <p> รหัสนักศึกษา : @students.Id </p>
+    <p> ชื่อนักศึกษา : @students.Name </p>
+    <p> คะแนนสอบ : @students.Scores </p>
+
+    @if (students.Scores >= 50)
+    {
+        <strong class="text-success"> "ผ่าน" </strong>
+    }
+    else
+    {
+        <strong class="text-danger"> "ไม่ผ่าน" </strong>
+
+    }
+    <hr/>
+}
