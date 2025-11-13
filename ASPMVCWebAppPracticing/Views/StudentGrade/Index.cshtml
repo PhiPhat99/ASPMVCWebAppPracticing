@@ -1,24 +1,47 @@
-﻿@model IEnumerable<ASPMVCWebAppPracticing.Models.Students>
+﻿@model IEnumerable<Students>
 @{
     ViewData["Title"] = "หน้าหลัก";
 }
 
-<h1 class="text-center"> คะแนนสอบรายวิชาการเขียนโปรแกรมเพื่อสร้างเว็ปแอปพลิเคชันเบื้องต้น </h1>
-
-@foreach (var students in Model)
+@if (Model.Count() > 0)
 {
-    <p> รหัสนักศึกษา : @students.Id </p>
-    <p> ชื่อนักศึกษา : @students.Name </p>
-    <p> คะแนนสอบ : @students.Score </p>
-
-    @if (students.Score >= 50)
-    {
-        <strong class="text-success"> "ผ่าน" </strong>
-    }
-    else
-    {
-        <strong class="text-danger"> "ไม่ผ่าน" </strong>
-
-    }
-    <hr/>
+    <h1 class="text-center"> คะแนนสอบรายวิชาการเขียนโปรแกรมเพื่อสร้างเว็ปแอปพลิเคชันเบื้องต้น </h1>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th> รหัสนักศึกษา </th>
+                <th> ชื่อนักศึกษา </th>
+                <th> คะแนนสอบ </th>
+                <th> แก้ไข </th>
+                <th> ลบ </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var students in Model)
+            {
+                <tr>
+                    <td> @students.StudentId </td>
+                    <td> @students.Name </td>
+                    <td> @students.Score </td>
+                    <td>
+                        <a class="btn btn-warning" asp-controller="StudentGrade" asp-action="Edit" asp-route-id="@students.StudentId"> แก้ไข </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger"
+                           asp-controller="StudentGrade"
+                           asp-action="Delete"
+                           asp-route-id="@students.StudentId"
+                           onclick="return confirm('คุณต้องการที่จะลบ @students.Name (@students.StudentId) นี้ใช่หรือไม่ ?')">
+                            ลบ
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
+else
+{
+    <div class="alert alert-secondary"> ไม่มีข้อมูลของนักศึกษาในระบบ </div>
+}
+

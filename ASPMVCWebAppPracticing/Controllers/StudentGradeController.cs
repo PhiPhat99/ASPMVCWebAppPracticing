@@ -1,7 +1,6 @@
 ﻿using ASPMVCWebAppPracticing.Data;
 using ASPMVCWebAppPracticing.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
 
 namespace ASPMVCWebAppPracticing.Controllers
 {
@@ -15,7 +14,9 @@ namespace ASPMVCWebAppPracticing.Controllers
 
         public IActionResult Index()
         {
-            Students s1 = new Students();   // Standard Object Creation
+            IEnumerable <Students> AllStudents  = _db.Students;
+
+            /*Students s1 = new Students();   // Standard Object Creation
             s1.Id = 68050808;
             s1.Name = "Alice Lee";
             s1.Score = 88;
@@ -33,9 +34,9 @@ namespace ASPMVCWebAppPracticing.Controllers
             List<Students> AllStudentsList = new List<Students>();
             AllStudentsList.Add(s1);
             AllStudentsList.Add(s2);
-            AllStudentsList.Add(s3);
+            AllStudentsList.Add(s3);*/
 
-            return View(AllStudentsList);
+            return View(AllStudents);
 
             //return View();
         }
@@ -50,9 +51,63 @@ namespace ASPMVCWebAppPracticing.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Students obj)
         {
-            _db.Students.Add(obj);
-            _db.SaveChanges();
+           if (ModelState.IsValid)
+            {
+                _db.Students.Add(obj);
+                _db.SaveChanges();
 
+                return RedirectToAction("Index");
+            }
+
+           return View(obj);
+        }
+
+        public IActionResult Edit(string id)
+        {
+            if (id==null)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.Students.Find(id);
+            if (obj==null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Students obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Students.Update(obj);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(obj);
+        }
+
+        public IActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _db.Students.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Students.Remove(obj);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
     }

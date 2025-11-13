@@ -1,16 +1,16 @@
 ﻿@model Students
 @{
-    ViewData["Title"] = "บันทึกคะแนนสอบ";
+    ViewData["Title"] = "แก้ไขข้อมูล";
 }
 
-<h1 class="text-center"> บันทึกคะแนนสอบนักศึกษา </h1>
-<form method="post" asp-controller="StudentGrade" asp-action="Create">
+<h1 class="text-center"> แก้ไขข้อมูลนักศึกษา </h1>
+<form method="post" asp-controller="StudentGrade" asp-action="Edit">
     <div>
         <label asp-for="StudentId" class="my-2"> </label>
         <input type="text" asp-for="StudentId" class="form-control" />
         <span asp-validation-for="StudentId" class="text-danger"> </span>
     </div>
-    <div class="form-group"> 
+    <div class="form-group">
         <label asp-for="Name" class="my-2"> </label>
         <input type="text" asp-for="Name" class="form-control" />
         <span asp-validation-for="Name" class="text-danger"> </span>
@@ -20,5 +20,6 @@
         <input type="number" asp-for="Score" class="form-control" />
         <span asp-validation-for="Score" class="text-danger"> </span>
     </div>
-    <button type="submit" class="btn btn-primary my-5"> บันทึกข้อมูล </button>
+    <button type="submit" class="btn btn-primary my-5"> อัปเดตข้อมูล </button>
 </form>
+
