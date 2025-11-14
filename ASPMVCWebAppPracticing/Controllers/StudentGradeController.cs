@@ -53,13 +53,57 @@ namespace ASPMVCWebAppPracticing.Controllers
         {
            if (ModelState.IsValid)
             {
+                if (obj.Score.HasValue)
+                {
+                    int ScoreValue = obj.Score.Value;
+                    if (ScoreValue == 100)
+                    {
+                        obj.Grade = "S";
+                    }
+                    else if (ScoreValue >= 80)
+                    {
+                        obj.Grade = "A";
+                    }
+                    else if (ScoreValue >=75)
+                    {
+                        obj.Grade = "B+";
+                    }
+                    else if (ScoreValue >= 70)
+                    {
+                        obj.Grade = "B";
+                    }
+                    else if (ScoreValue >= 65)
+                    {
+                        obj.Grade = "C+";
+                    }
+                    else if (ScoreValue >= 60)
+                    {
+                        obj.Grade = "C";
+                    }
+                    else if (ScoreValue >= 55)
+                    {
+                        obj.Grade = "D+";
+                    }
+                    else if (ScoreValue >= 50)
+                    {
+                        obj.Grade = "D";
+                    }
+                    else if (ScoreValue < 50)
+                    {
+                        obj.Grade = "F";
+                    }
+                    else
+                    {
+                        obj.Grade = "N/A";
+                    }
+                }
+
                 _db.Students.Add(obj);
                 _db.SaveChanges();
-
                 return RedirectToAction("Index");
             }
 
-           return View(obj);
+            return View(obj);
         }
 
         public IActionResult Edit(string id)
@@ -84,6 +128,51 @@ namespace ASPMVCWebAppPracticing.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (obj.Score.HasValue)
+                {
+                    int ScoreValue = obj.Score.Value;
+                    if (ScoreValue == 100)
+                    {
+                        obj.Grade = "S";
+                    }
+                    else if (ScoreValue >= 80)
+                    {
+                        obj.Grade = "A";
+                    }
+                    else if (ScoreValue >= 75)
+                    {
+                        obj.Grade = "B+";
+                    }
+                    else if (ScoreValue >= 70)
+                    {
+                        obj.Grade = "B";
+                    }
+                    else if (ScoreValue >= 65)
+                    {
+                        obj.Grade = "C+";
+                    }
+                    else if (ScoreValue >= 60)
+                    {
+                        obj.Grade = "C";
+                    }
+                    else if (ScoreValue >= 55)
+                    {
+                        obj.Grade = "D+";
+                    }
+                    else if (ScoreValue >= 50)
+                    {
+                        obj.Grade = "D";
+                    }
+                    else if (ScoreValue < 50)
+                    {
+                        obj.Grade = "F";
+                    }
+                    else
+                    {
+                        obj.Grade = "N/A";
+                    }
+                }
+
                 _db.Students.Update(obj);
                 _db.SaveChanges();
 
@@ -109,6 +198,11 @@ namespace ASPMVCWebAppPracticing.Controllers
             _db.Students.Remove(obj);
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public IActionResult About()
+        {
+            return View();
         }
     }
 }

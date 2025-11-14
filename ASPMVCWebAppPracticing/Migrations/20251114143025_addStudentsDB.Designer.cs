@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ASPMVCWebAppPracticing.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251113174616_addStudentsDB")]
+    [Migration("20251114143025_addStudentsDB")]
     partial class addStudentsDB
     {
         /// <inheritdoc />
@@ -19,7 +19,7 @@ namespace ASPMVCWebAppPracticing.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.10")
+                .HasAnnotation("ProductVersion", "9.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
